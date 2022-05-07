@@ -1,20 +1,20 @@
 package praktikum.test;
 
+import api.client.AuthClient;
+import api.client.OrdersClient;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import praktikum.GeneralListOfOrders;
+import praktikum.LoginUser;
 import praktikum.UserAuthorization;
 
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static praktikum.EndPoints.*;
-import static praktikum.PatchUser.USER_EXISTS;
 
 
 public class OrdersListTest {
@@ -28,14 +28,9 @@ public class OrdersListTest {
     @Test
     public void listOfOrdersUnauthorized() {
 
-        Response response =
-                given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .when()
-                        .get(ORDERS);
-
-        response.then().statusCode(HTTP_UNAUTHORIZED)
+        OrdersClient ordersClient = new OrdersClient();
+        Response orderListWithoutAuthorization = ordersClient.listOfOrders();
+        orderListWithoutAuthorization.then().statusCode(HTTP_UNAUTHORIZED)
                 .body("success", equalTo(false))
                 .body("message", equalTo("You should be authorised"));
 
@@ -45,41 +40,26 @@ public class OrdersListTest {
     @Test
     public void listOfOrdersAuthorized() {
 
-
-        Response response =
-                given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .body(USER_EXISTS)
-                        .when()
-                        .post(LOGIN);
-
-        response.then().body("accessToken", equalTo(response.getBody().as(UserAuthorization.class).getAccessToken()));
-        String str = response.getBody().as(UserAuthorization.class).getAccessToken().substring(7);
+        AuthClient authClient = new AuthClient();
+        Response loginUserResponse = authClient.login(LoginUser.USER_EXISTS);
+        loginUserResponse.then().statusCode(HTTP_OK).body("success", equalTo(true));
+        String str = loginUserResponse.getBody().as(UserAuthorization.class).getAccessToken().substring(7);
         System.out.println(str);
 
-
-        Response listOfOrders =
-                given()
-                        .header("Content-type", "application/json")
-                        .when()
-                        .auth().oauth2(str)
-                        .get(ORDERS);
-        listOfOrders.then().statusCode(HTTP_OK)
-
-                .body("orders[56].id", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).getOrders().get(56).id))
-                .body("orders[56].status", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).getOrders().get(56).status))
-                .body("orders[56].ingredients", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).getOrders().get(56).getIngredients()))
-                .body("orders[56].createdAt", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).getOrders().get(56).createdAt))
-                .body("orders[56].updatedAt", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).getOrders().get(56).updatedAt))
-                .body("orders[56].number", equalTo(8817))
-                .body("orders[56].name", equalTo("Био-марсианский бургер"))
-                .body("orders[56].ingredients", equalTo(List.of("61c0c5a71d1f82001bdaaa71")))
-                .body("totalToday", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).totalToday))
-                .body("total", equalTo(listOfOrders.getBody().as(GeneralListOfOrders.class).total))
+        OrdersClient ordersClient = new OrdersClient();
+        Response orderListWithAuthorization = ordersClient.listOfOrdersAuthorized(str);
+        orderListWithAuthorization.then().statusCode(HTTP_OK)
+                //.body("orders[0]._id", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(56).id))
+                .body("orders[0].status", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).status))
+                //.body("orders[0].ingredients", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).getIngredients()))
+                .body("orders[0].createdAt", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).createdAt))
+                .body("orders[0].updatedAt", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).updatedAt))
+                .body("orders[0].number", equalTo(9289))
+                .body("orders[0].name", equalTo("Флюоресцентный бессмертный бургер"))
+                .body("orders[0].ingredients", equalTo(List.of("61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f")))
+                .body("totalToday", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).totalToday))
+                .body("total", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).total))
                 .body("success", equalTo(true));
-
-
     }
 
 }

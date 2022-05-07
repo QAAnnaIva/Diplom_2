@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="praktikum.test.CreateUserTest" time="5.247" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="praktikum.test.CreateUserTest" time="8.789" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2020.3.3"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -64,9 +64,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="praktikum.test.CreateUserTest" name="userWithoutPassword" time="3.576"/>
-  <testcase classname="praktikum.test.CreateUserTest" name="createNewUser" time="0.493"/>
-  <testcase classname="praktikum.test.CreateUserTest" name="userAlreadyExists" time="0.417"/>
-  <testcase classname="praktikum.test.CreateUserTest" name="userWithoutName" time="0.409"/>
-  <testcase classname="praktikum.test.CreateUserTest" name="userWithoutEmail" time="0.352"/>
+  <testcase classname="praktikum.test.CreateUserTest" name="userWithoutPassword" time="4.55"/>
+  <testcase classname="praktikum.test.CreateUserTest" name="createNewUser" time="0.921"/>
+  <testcase classname="praktikum.test.CreateUserTest" name="userAlreadyExists" time="1.163"/>
+  <testcase classname="praktikum.test.CreateUserTest" name="userWithoutName" time="1.066"/>
+  <testcase classname="praktikum.test.CreateUserTest" name="userWithoutEmail" time="1.089"/>
 </testsuite>

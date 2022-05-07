@@ -1,15 +1,15 @@
 package praktikum.test;
 
+import api.client.AuthClient;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static praktikum.EndPoints.LOGIN;
 import static praktikum.LoginUser.USER_DOES_NOT_EXIST;
 import static praktikum.LoginUser.USER_EXISTS;
 
@@ -20,40 +20,24 @@ public class LoginUserTest {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
 
-    //логин под существующим пользователем
     @Test
+    @DisplayName("Login existed user")
     public void loginUser() {
 
-        Response response =
-                given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .body(USER_EXISTS)
-                        .when()
-                        .post(LOGIN);
-        response.then().statusCode(HTTP_OK)
-                .body("success", equalTo(true));
-        // .body("user.email", equalTo("piglet@mail.ru"))
-        // .body("user.name", equalTo("Анна"))
-        // .body("accessToken", equalTo(response.getBody().as(UserAuthorization.class).getAccessToken()))
-        // .body("refreshToken", equalTo(response.getBody().as(UserAuthorization.class).getRefreshToken()));
+        AuthClient authClient = new AuthClient();
+        Response loginUserResponse = authClient.login(USER_EXISTS);
+        loginUserResponse.then().statusCode(HTTP_OK).body("success", equalTo(true));
 
     }
 
-    //логин с неверным логином и паролем
+
     @Test
+    @DisplayName("User doesn't exist")
     public void loginUserDoesNotExist() {
 
-        Response response =
-                given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .body(USER_DOES_NOT_EXIST)
-                        .when()
-                        .post(LOGIN);
-        response.then().statusCode(HTTP_UNAUTHORIZED)
-                .body("success", equalTo(false))
-                .body("message", equalTo("email or password are incorrect"));
+        AuthClient authClient = new AuthClient();
+        Response userDoesNotExistResponse = authClient.login(USER_DOES_NOT_EXIST);
+        userDoesNotExistResponse.then().statusCode(HTTP_UNAUTHORIZED).body("success", equalTo(false)).body("message", equalTo("email or password are incorrect"));
 
     }
 

@@ -27,7 +27,7 @@ public class CreateUser {
     }
 
     // public static final CreateUser CREATE_USER = new CreateUser(getRandomString() + "@mail.ru", getRandomString(), getRandomString());
-    public static final CreateUser CREATE_TEST_USER = new CreateUser("testUser2000@mail.ru", "5682pa3_", "Анна Иванова");
+    public static final CreateUser CREATE_TEST_USER = new CreateUser("testUser2001@mail.ru", "5682pa3", "Анна Иванова");
     public static final CreateUser USER_EXISTS = new CreateUser("piglet@mail.ru", "12345678", "Анна");
     public static final CreateUser WITHOUTREQUIREDFIELD = new CreateUser("", "12345678", "Анна");
     public static final CreateUser WITHOUTPASSWORD = new CreateUser("somemail@mail.ru", "", "Анна");
