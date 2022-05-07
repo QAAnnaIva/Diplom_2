@@ -1,6 +1,6 @@
 package praktikum;
 
-import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -16,12 +16,8 @@ public class Orders {
     public String createdAt;
     public String updatedAt;
 
-   /* @JsonProperty("_id")
-    public String getId() {
-        return id;
-    }*/
-
-    @JsonProperty("_id") public String id;
+    @SerializedName(value = "_id")
+    public String id;
     public String name;
     public Integer number;
 }

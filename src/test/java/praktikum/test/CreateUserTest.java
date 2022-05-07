@@ -42,7 +42,7 @@ public class CreateUserTest {
 
     //создание пользователя, который уже зарегистрирован
     @Test
-    @DisplayName("UserAlreadyExists")
+    @DisplayName("User already exists")
     public void userAlreadyExists() {
         AuthClient authClient = new AuthClient();
         Response createNewUserResponse = authClient.register(CreateUser.CREATE_TEST_USER);
@@ -58,7 +58,7 @@ public class CreateUserTest {
 
     //не заполнено одно из обязательных полей - email
     @Test
-    @DisplayName("UserWithoutEmail")
+    @DisplayName("User without email")
     public void userWithoutEmail() {
 
         AuthClient authClient = new AuthClient();
@@ -75,7 +75,7 @@ public class CreateUserTest {
 
     //не заполнено одно из обязательных полей - password
     @Test
-    @DisplayName("UserWithoutPassword")
+    @DisplayName("User without password")
     public void userWithoutPassword() {
 
         AuthClient authClient = new AuthClient();
@@ -91,7 +91,7 @@ public class CreateUserTest {
 
     //не заполнено одно из обязательных полей - name
     @Test
-    @DisplayName("UserWithoutName")
+    @DisplayName("User without name")
     public void userWithoutName() {
 
         AuthClient authClient = new AuthClient();
@@ -104,7 +104,6 @@ public class CreateUserTest {
                 .body("success", equalTo(false))
                 .body("message", equalTo("Email, password and name are required fields"));
     }
-
 
     @After
     public void deleteUser() {

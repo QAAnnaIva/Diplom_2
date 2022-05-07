@@ -30,7 +30,6 @@ public class LoginUserTest {
 
     }
 
-
     @Test
     @DisplayName("User doesn't exist")
     public void loginUserDoesNotExist() {

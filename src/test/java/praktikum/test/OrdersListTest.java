@@ -2,6 +2,7 @@ package praktikum.test;
 
 import api.client.AuthClient;
 import api.client.OrdersClient;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class OrdersListTest {
 
     //неавторизованный пользователь
     @Test
+    @DisplayName("List of orders without authorization - impossible to see the list")
     public void listOfOrdersUnauthorized() {
 
         OrdersClient ordersClient = new OrdersClient();
@@ -38,6 +40,7 @@ public class OrdersListTest {
 
     //авторизованный пользователь
     @Test
+    @DisplayName("List of orders with authorization")
     public void listOfOrdersAuthorized() {
 
         AuthClient authClient = new AuthClient();
@@ -49,9 +52,9 @@ public class OrdersListTest {
         OrdersClient ordersClient = new OrdersClient();
         Response orderListWithAuthorization = ordersClient.listOfOrdersAuthorized(str);
         orderListWithAuthorization.then().statusCode(HTTP_OK)
-                //.body("orders[0]._id", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(56).id))
+                .body("orders[0]._id", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).id))
                 .body("orders[0].status", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).status))
-                //.body("orders[0].ingredients", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).getIngredients()))
+                .body("orders[0].ingredients", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).getIngredients()))
                 .body("orders[0].createdAt", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).createdAt))
                 .body("orders[0].updatedAt", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).updatedAt))
                 .body("orders[0].number", equalTo(9289))
@@ -60,6 +63,7 @@ public class OrdersListTest {
                 .body("totalToday", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).totalToday))
                 .body("total", equalTo(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).total))
                 .body("success", equalTo(true));
+        System.out.println(orderListWithAuthorization.getBody().as(GeneralListOfOrders.class).getOrders().get(0).id);
     }
 
 }

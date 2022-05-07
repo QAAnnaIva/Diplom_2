@@ -1,7 +1,6 @@
 package praktikum;
 
-import io.qameta.allure.internal.shadowed.jackson.annotation.JsonCreator;
-import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,28 +39,13 @@ public class Order {
     public String createdAt;
     public String updatedAt;
 
-
-  /*  @JsonProperty("_id")
-    public String getId() {
-        return id;
-    }*/
-
-    @JsonProperty("_id") public String id;
+    @SerializedName(value = "_id")
+    public String id;
     public List<IngredientsList> ingredients = new ArrayList<>();
 
     public Owner getOwner() {
         return owner;
     }
 
-   /* @JsonCreator
-
-    public Order(
-
-            @JsonProperty("_id") String id) {
-
-        this._id = id;
-
-
-    }*/
 }
 

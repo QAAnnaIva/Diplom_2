@@ -1,6 +1,7 @@
 package praktikum.test;
 
 import api.client.AuthClient;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -21,9 +22,9 @@ public class UserDataTest {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
 
-
     //с авторизацией
     @Test
+    @DisplayName("Change user data with authorization")
     public void authorizedUser() {
 
         AuthClient authClient = new AuthClient();
@@ -44,9 +45,9 @@ public class UserDataTest {
 
     }
 
-
     //без авторизации
     @Test
+    @DisplayName("Change user data without authorization - impossible to change the user data")
     public void unAuthorizedUser() {
 
         AuthClient authClient = new AuthClient();

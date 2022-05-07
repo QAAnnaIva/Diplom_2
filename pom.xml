@@ -15,13 +15,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <!--Тег scope указывает на область видимости зависимости: она видна только тестовым классам в директории src/test/java-->
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -62,12 +56,7 @@
             <artifactId>allure-rest-assured</artifactId>
             <version>${allure.version}</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
 </project>
