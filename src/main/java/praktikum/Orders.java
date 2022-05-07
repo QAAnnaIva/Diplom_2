@@ -1,5 +1,7 @@
 package praktikum;
 
+import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Orders {
@@ -8,12 +10,18 @@ public class Orders {
         return ingredients;
     }
 
-    public List <String> ingredients ;
+    public List<String> ingredients;
 
     public String status;
     public String createdAt;
     public String updatedAt;
-    public String _id;
+
+   /* @JsonProperty("_id")
+    public String getId() {
+        return id;
+    }*/
+
+    @JsonProperty("_id") public String id;
     public String name;
     public Integer number;
 }

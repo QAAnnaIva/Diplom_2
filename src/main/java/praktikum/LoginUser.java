@@ -12,6 +12,6 @@ public class LoginUser {
     }
 
 
-    public static final LoginUser USER_EXISTS = new LoginUser("piglet@mail.ru","12345678");
-    public static final LoginUser USER_DOES_NOT_EXIST = new LoginUser("new1user2@mail.ru","password345");
+    public static final LoginUser USER_EXISTS = new LoginUser("piglet@mail.ru", "12345678");
+    public static final LoginUser USER_DOES_NOT_EXIST = new LoginUser("new1user2@mail.ru", "password345");
 }

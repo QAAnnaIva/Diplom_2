@@ -25,13 +25,15 @@ public class CreateUser {
         this.password = password;
         this.name = name;
     }
-    public static final CreateUser CREATE_USER = new CreateUser(getRandomString() + "@mail.ru",getRandomString(),getRandomString());
-    public static final CreateUser USER_EXISTS = new CreateUser("piglet@mail.ru","12345678","Анна");
-    public static final CreateUser WITHOUTREQUIREDFIELD = new CreateUser("","12345678","Анна");
-    public static final CreateUser WITHOUTPASSWORD = new CreateUser("somemail@mail.ru","","Анна");
-    public static final CreateUser WITHOUTNAME = new CreateUser("somemail@mail.ru","12345678","");
 
-    public static String getRandomString() {
+    // public static final CreateUser CREATE_USER = new CreateUser(getRandomString() + "@mail.ru", getRandomString(), getRandomString());
+    public static final CreateUser CREATE_TEST_USER = new CreateUser("testUser2000@mail.ru", "5682pa3_", "Анна Иванова");
+    public static final CreateUser USER_EXISTS = new CreateUser("piglet@mail.ru", "12345678", "Анна");
+    public static final CreateUser WITHOUTREQUIREDFIELD = new CreateUser("", "12345678", "Анна");
+    public static final CreateUser WITHOUTPASSWORD = new CreateUser("somemail@mail.ru", "", "Анна");
+    public static final CreateUser WITHOUTNAME = new CreateUser("somemail@mail.ru", "12345678", "");
+
+   /* public static String getRandomString() {
         String RANDOM = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder random = new StringBuilder();
         Random rnd = new Random();
@@ -42,5 +44,5 @@ public class CreateUser {
         String randomStr = random.toString();
         return randomStr;
 
-    }
+    }*/
 }

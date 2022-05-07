@@ -1,11 +1,19 @@
 package praktikum;
 
+import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
+
 import java.lang.reflect.Array;
 import java.util.List;
 
 public class IngredientsList {
 
-    public String _id;
+    @JsonProperty("_id") public String id;
+
+   /* @JsonProperty("_id")
+    public String getId() {
+        return id;
+    }*/
+
     public String name;
     public String type;
     public Integer proteins;
@@ -14,8 +22,8 @@ public class IngredientsList {
     public Integer calories;
     public Double price;
     public String image;
-    public String image_mobile;
-    public String image_large;
-    public Integer __v;
+    @JsonProperty("image_mobile") public String imageMobile;
+    @JsonProperty("image_large") public String imageLarge;
+    @JsonProperty("__v") public Integer v;
 
 }
